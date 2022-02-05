@@ -2,3 +2,4 @@ log
 /.docker_memo/mysql/data
 .envrc
 vendor
+.phplint-cache
