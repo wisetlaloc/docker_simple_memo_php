@@ -1,2 +1,3 @@
 log
 /.docker_memo/mysql/data
+.envrc
