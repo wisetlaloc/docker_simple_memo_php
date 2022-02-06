@@ -20,7 +20,7 @@ function emptyCheck(&$error_messages, $input, $error_message){
  * @param int $minimum
  */
 function gtEqCheck(&$error_messages, $input, $error_message, $minimum = 8){
-    if (mb_strlen($input) <= $minimum) {
+    if (mb_strlen($input) < $minimum) {
         array_push($error_messages, $error_message);
     }
 }
@@ -33,7 +33,7 @@ function gtEqCheck(&$error_messages, $input, $error_message, $minimum = 8){
  * @param int $maximum
  */
 function ltEqCheck(&$error_messages, $input, $error_message, $maximum = 255){
-    if (mb_strlen($input) >= $maximum) {
+    if (mb_strlen($input) > $maximum) {
         array_push($error_messages, $error_message);
     }
 }

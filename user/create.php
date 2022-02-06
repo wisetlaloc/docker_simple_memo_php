@@ -25,7 +25,7 @@
   }
 
   if($_SESSION['errors']) {
-    header('Location: ../../user/');
+    header('Location: ../../user/new.php');
     exit;
   }
 
@@ -40,6 +40,11 @@
       $statement->bindParam(':password', $password);
       $statement->execute();
     }
+
+    $_SESSION['user'] = [
+                'name' => $user_name,
+                'id' => $database_handler->lastInsertId()
+    ];
   } catch (Throwable $e) {
     echo $e->getMessage();
     exit;
