@@ -1,7 +1,17 @@
+<?php
+  session_start();
+  require '../common/auth.php'
+
+  if(isLogin()) {
+    header('Location: ../memo');
+    exit;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <?php
-        include_once "../common/header.php";
+        include_once "../partials/header.php";
         echo getHeader("Sign in");
     ?>
     <body>
@@ -10,7 +20,7 @@
                 <div class="card rounded login-card-width shadow">
                     <div class="card-body">
                         <?php
-                            include_once "../common/error_message.php"
+                            include_once "../partials/error_message.php"
                         ?>
                         <div class="rounded-circle mx-auto border-gray border d-flex mt-3 icon-circle">
                             <img src="../public/images/animal_stand_zou.png" class="w-75 mx-auto p-2" alt="icon"/>

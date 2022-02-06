@@ -1,7 +1,16 @@
+<?php
+    require '../common/auth.php';
+
+    if (!isLogin()) {
+        header('Location: ../session/new.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
     <?php
-        include_once "../common/header.php";
+        include_once "../partials/header.php";
         echo getHeader("Create a Memo");
     ?>
     <body class="bg-white">

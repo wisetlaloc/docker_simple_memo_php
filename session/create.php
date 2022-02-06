@@ -1,5 +1,13 @@
 <?php
   session_start();
+
+  require '../common/auth.php'
+
+  if(isLogin()) {
+    header('Location: ../memo');
+    exit;
+  }
+
   require '../common/validation.php';
   require '../common/database.php';
 
