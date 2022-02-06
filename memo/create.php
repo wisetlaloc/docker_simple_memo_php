@@ -18,14 +18,10 @@
             $statement->execute();
         }
 
-        $_SESSION['select_memo'] = [
-            'id' => $database_handler->lastInsertId(),
-            'title' => $title,
-            'content' => '',
-        ];
+        $edit_id = $database_handler->lastInsertId();
     } catch (Throwable $e) {
         echo $e->getMessage();
         exit;
     }
-    header('Location: ../memo');
+    header("Location: ../memo/index.php?id=$edit_id");
     exit;

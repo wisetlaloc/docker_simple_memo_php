@@ -29,8 +29,7 @@
         }
     }
 
-    $edit_id = "";
-    if (isset($edit_memo) && !empty($edit_memo['id'])) { $edit_id = $edit_memo['id']; }
+    if (!isset($edit_memo) && !empty($memos)) { $edit_memo = $memos[0]; }
 ?>
 
 <!DOCTYPE html>
@@ -58,11 +57,11 @@
                     <div class="left-memo-list list-group-flush p-0">
                         <?php if(empty($memos)): ?>
                             <div class="pl-3 pt-3 h5 text-info text-center">
-                                <i class="far fa-surprise"></i>メモがありません。
+                                <i class="far fa-surprise"></i> No memos found !
                             </div>
                         <?php endif; ?>
                         <?php foreach($memos as $memo): ?>
-                            <a href="./index.php?id=<?php echo $memo['id']; ?>" class="list-group-item list-group-item-action <?php echo $edit_id == $memo['id'] ? 'active' : ''; ?>">
+                            <a href="./index.php?id=<?php echo $memo['id']; ?>" class="list-group-item list-group-item-action <?php echo $edit_memo['id'] == $memo['id'] ? 'active' : ''; ?>">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"><?php echo $memo["title"] ?></h5>
                                     <small><?php echo date('Y/m/d H:i', strtotime($memo['updated_at'])); ?></small>
@@ -83,7 +82,7 @@
                 <div class="col-9 h-100">
                     <?php if(isset($edit_memo)): ?>
                         <form class="w-100 h-100" method="post">
-                            <input type="hidden" name="edit_id" value="<?php echo $edit_id; ?>" />
+                            <input type="hidden" name="edit_id" value="<?php echo $edit_memo['id']; ?>" />
                             <div id="memo-menu">
                                 <button type="submit" class="btn btn-danger" formaction="./destroy.php"><i class="fas fa-trash-alt"></i></button>
                                 <button type="submit" class="btn btn-success" formaction="./update.php"><i class="fas fa-save"></i></button>
@@ -93,7 +92,7 @@
                         </form>
                     <?php else: ?>
                         <div class="mt-3 alert alert-info">
-                            <i class="fas fa-info-circle"></i>create or select a memo
+                            <i class="fas fa-info-circle"></i><span> create a memo</span>
                         </div>
                     <?php endif; ?>
                 </div>
