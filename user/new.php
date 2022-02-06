@@ -53,6 +53,14 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-center">
+                                Already have an account?
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a href="../session/new.php" class="text-success">Sign in</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
