@@ -85,7 +85,7 @@
                         <form class="w-100 h-100" method="post">
                             <input type="hidden" name="edit_id" value="<?php echo $edit_id; ?>" />
                             <div id="memo-menu">
-                                <button type="submit" class="btn btn-danger" formaction="./delete.php"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-danger" formaction="./destroy.php"><i class="fas fa-trash-alt"></i></button>
                                 <button type="submit" class="btn btn-success" formaction="./update.php"><i class="fas fa-save"></i></button>
                             </div>
                             <input type="text" id="memo-title" name="edit_title" placeholder="title" value="<?php echo $edit_memo['title']; ?>" />
