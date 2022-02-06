@@ -20,15 +20,17 @@
         }
     }
 
-    $edit_id = "";
-    if (isset($_SESSION['select_memo'])) {
-        $edit_memo = $_SESSION['select_memo'];
-        $edit_id = empty($edit_memo['id']) ? "" : $edit_memo['id'];
-        $edit_title = empty($edit_memo['title']) ? "" : $edit_memo['title'];
-        $edit_content = empty($edit_memo['content']) ? "" : $edit_memo['content'];
+    if (isset($_GET['id'])) {
+        foreach($memos as $memo) {
+            if ($memo['id'] == $_GET['id']) {
+                $edit_memo = $memo;
+                break;
+            }
+        }
     }
 
-
+    $edit_id = "";
+    if (isset($edit_memo) && !empty($edit_memo['id'])) { $edit_id = $edit_memo['id']; }
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +62,7 @@
                             </div>
                         <?php endif; ?>
                         <?php foreach($memos as $memo): ?>
-                            <a href="./show.php?id=<?php echo $memo['id']; ?>" class="list-group-item list-group-item-action <?php echo $edit_id == $memo['id'] ? 'active' : ''; ?>">
+                            <a href="./index.php?id=<?php echo $memo['id']; ?>" class="list-group-item list-group-item-action <?php echo $edit_id == $memo['id'] ? 'active' : ''; ?>">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"><?php echo $memo["title"] ?></h5>
                                     <small><?php echo date('Y/m/d H:i', strtotime($memo['updated_at'])); ?></small>
@@ -79,15 +81,21 @@
                     </div>
                 </div>
                 <div class="col-9 h-100">
-                    <form class="w-100 h-100" method="post">
-                        <input type="hidden" name="edit_id" value="" />
-                        <div id="memo-menu">
-                            <button type="submit" class="btn btn-danger" formaction=""><i class="fas fa-trash-alt"></i></button>
-                            <button type="submit" class="btn btn-success" formaction=""><i class="fas fa-save"></i></button>
+                    <?php if(isset($edit_memo)): ?>
+                        <form class="w-100 h-100" method="post">
+                            <input type="hidden" name="edit_id" value="<?php echo $edit_id; ?>" />
+                            <div id="memo-menu">
+                                <button type="submit" class="btn btn-danger" formaction="./action/delete.php"><i class="fas fa-trash-alt"></i></button>
+                                <button type="submit" class="btn btn-success" formaction="./action/update.php"><i class="fas fa-save"></i></button>
+                            </div>
+                            <input type="text" id="memo-title" name="edit_title" placeholder="title" value="<?php echo $edit_memo['title']; ?>" />
+                            <textarea id="memo-content" name="edit_content" placeholder="content"><?php echo $edit_memo['content']; ?></textarea>
+                        </form>
+                    <?php else: ?>
+                        <div class="mt-3 alert alert-info">
+                            <i class="fas fa-info-circle"></i>create or select a memo
                         </div>
-                        <input type="text" id="memo-title" name="edit_title" placeholder="title" value="" />
-                        <textarea id="memo-content" name="edit_content" placeholder="content"></textarea>
-                    </form>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
