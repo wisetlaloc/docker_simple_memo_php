@@ -31,7 +31,7 @@
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
     if (!$user || !password_verify($user_password, $user['password'])) {
-      $_SESSION['errors'] = ['メールアドレスまたはパスワードが間違っています。'];
+      $_SESSION['errors'] = ['either your email or password is incorrect'];
       header('Location: ../../session/new.php');
       exit;
     } else {
